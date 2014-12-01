@@ -1,2 +1,2 @@
-test
+SIMS Easy Button
 ====
