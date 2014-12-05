@@ -9,26 +9,29 @@ chrome.browserAction.onClicked.addListener(function(activeTab) {
 		//check to make sure there was a match
 		//further research indicates if(baseURL) or if(baseURL !== null) should be used instead
 		//will test and decide
-		if(baseURL != null) {
-			//take baseURL[0] and concatenates the necessary subdirectories
-			var SSID = baseURL[0] + "netconfig_wifi.php";
-			var onlineDevices = baseURL[0] + "identify.php";
-			var landingPage = baseURL[0] + "proxy_disclaimer.php";
-			var roomBinding = baseURL[0] + "roomlist.php";
-			var disclaimerLogs = baseURL[0] + "wifistats_disclaimers.php";
-			var hsiaSubscription = baseURL[0] + "subscr_audit.php";
-			var fullReport = baseURL[0] + "sysstatus_full.php";
+		if(baseURL) {
+			chrome.storage.sync.get(
+			{
+				tab1: "netconfig_wifi.php",
+				tab2: "identify.php",
+				tab3: "proxy_disclaimer.php",
+				tab4: "roomlist.php",
+				tab5: "wifistats_disclaimers.php",
+				tab6: "subscr_audit.php",
+				tab7: "sysstatus_full.php"
+			}, function(items) {
+				//open new tab in background with the new URL
+				chrome.tabs.create({ url: baseURL[0] + items.tab2, active: false });
+				chrome.tabs.create({ url: baseURL[0] + items.tab3, active: false });
+				chrome.tabs.create({ url: baseURL[0] + items.tab4, active: false });
+				chrome.tabs.create({ url: baseURL[0] + items.tab5, active: false });
+				chrome.tabs.create({ url: baseURL[0] + items.tab6, active: false });
+				chrome.tabs.create({ url: baseURL[0] + items.tab7, active: false });
 				
-			//open new tab in background with the new URL
-			chrome.tabs.create({ url: onlineDevices, active: false });
-			chrome.tabs.create({ url: landingPage, active: false });
-			chrome.tabs.create({ url: roomBinding, active: false });
-			chrome.tabs.create({ url: disclaimerLogs, active: false });
-			chrome.tabs.create({ url: hsiaSubscription, active: false });
-			chrome.tabs.create({ url: fullReport, active: false });
-				
-			//navigate the current selected tab to a new page
-			chrome.tabs.update(tabs[0].id, {url: SSID});
+				//navigate the current selected tab to a new page
+				chrome.tabs.update(tabs[0].id, {url: baseURL[0] + items.tab1});
+			});
 		}
 	});
 });
+
