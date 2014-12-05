@@ -7,14 +7,20 @@ function save_options() {
   var tab5 = document.getElementById('tab5').value;
   var tab6 = document.getElementById('tab6').value;
   var tab7 = document.getElementById('tab7').value;
+  var tab8 = document.getElementById('tab8').value;
+  var tab9 = document.getElementById('tab9').value;
+  var tab10 = document.getElementById('tab10').value;
   chrome.storage.sync.set({
-    tab1: tab1,
-	tab2: tab2,
-	tab3: tab3,
-	tab4: tab4,
-	tab5: tab5,
-	tab6: tab6,
-	tab7: tab7
+    "tab1": tab1,
+	"tab2": tab2,
+	"tab3": tab3,
+	"tab4": tab4,
+	"tab5": tab5,
+	"tab6": tab6,
+	"tab7": tab7,
+	"tab8": tab8,
+	"tab9": tab9,
+	"tab10": tab10
   }, function() {
     // Update status to let user know options were saved.
     var save_status = document.getElementById('save_status');
@@ -43,13 +49,16 @@ function reset_options() {
 function restore_options() {
   //default
   chrome.storage.sync.get({
-    tab1: "netconfig_wifi.php",
-	tab2: "identify.php",
-	tab3: "proxy_disclaimer.php",
-	tab4: "roomlist.php",
-	tab5: "wifistats_disclaimers.php",
-	tab6: "subscr_audit.php",
-	tab7: "sysstatus_full.php"
+    "tab1": "netconfig_wifi.php",
+	"tab2": "identify.php",
+	"tab3": "proxy_disclaimer.php",
+	"tab4": "roomlist.php",
+	"tab5": "wifistats_disclaimers.php",
+	"tab6": "subscr_audit.php",
+	"tab7": "sysstatus_full.php",
+	"tab8": "",
+	"tab9": "",
+	"tab10": ""
   }, function(items) {
     document.getElementById('tab1').value = items.tab1;
     document.getElementById('tab2').value = items.tab2;
@@ -58,6 +67,9 @@ function restore_options() {
 	document.getElementById('tab5').value = items.tab5;
 	document.getElementById('tab6').value = items.tab6;
 	document.getElementById('tab7').value = items.tab7;
+	document.getElementById('tab8').value = items.tab8;
+	document.getElementById('tab9').value = items.tab9;
+	document.getElementById('tab10').value = items.tab10;
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
