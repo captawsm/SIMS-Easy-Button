@@ -44,6 +44,14 @@ function handleClick(state) {
 			url: baseURL + "sysstatus_full.php",
 			inBackground: true
 		});
+		tabs.open({
+			url: baseURL + "billing_comm.php?mode=test",
+			inBackground: true
+		});
+		tabs.open({
+			url: baseURL + "ping.php",
+			inBackground: true
+		});
 		tabs.activeTab.close();
 	}
 }
